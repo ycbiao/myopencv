@@ -1,4 +1,4 @@
-package com.example.opencvtest;
+package com.example.opencvtest.fun;
 
 import com.example.opencvtest.common.Learn;
 import org.opencv.core.*;
@@ -10,13 +10,34 @@ import static org.opencv.core.CvType.*;
 import static org.opencv.core.CvType.CV_32F;
 
 public class SvmTest {
-    public static Mat test(){
-        int width = 512, height = 512;						//512*512 的正方形区域
-        Mat image = new Mat(width,height, CV_8UC3);
+    public static Mat test() {
+        int width = 512, height = 512;                        //512*512 的正方形区域
+        Mat image = new Mat(width, height, CV_8UC3);
 
-        int labels[] = { 1, 1, 1, 1, 1, 1 ,0, 0, 0, 0};			//8 个结果
-        Mat labelsMat = new Mat(labels.length, 1, CV_32S);
-        labelsMat.put(0,0,labels);
+//        int labels[] = { 1, 1, 1, 1, 1, 1 ,0, 0, 0, 0};			//8 个结果
+//        Mat labelsMat = new Mat(labels.length, 1, CV_32S);
+//        labelsMat.put(0,0,labels);
+
+        float labels[][] = {
+                {1, 1},                //8 样本点（和结果对应）
+                {1, 1},
+                {1, 1},
+                {1, 1},
+                {0, 0},
+                {0, 0},
+                {0, 0},
+                {0, 0},
+                {0, 0},
+                {0, 0}
+        };
+
+        Mat labelsMat = new Mat(labels.length, labels[0].length, CV_32F);
+        for (int k = 0;k < labels.length ;k++){
+            for (int l = 0 ;l < 2; l++){
+                labelsMat.put(k,l,labels[k][l]);
+            }
+
+        }
 
         float trainingData[][] = {
                 {10, 10},				//8 样本点（和结果对应）
@@ -40,16 +61,16 @@ public class SvmTest {
         }
 
         StatModel statModel;
-         statModel= Learn.svm(trainingDataMat,labelsMat);
+//         statModel= Learn.svm(trainingDataMat,labelsMat);
 //         statModel= Learn.boost(td);
 
-        Mat labelsMat1 = new Mat();
-        labelsMat.convertTo(labelsMat1,CV_32F);
+//        Mat labelsMat1 = new Mat();
+//        labelsMat.convertTo(labelsMat1,CV_32F);
 //         statModel= Learn.logisticRegression(trainingDataMat,labelsMat1);
 //        statModel = Learn.myNormalBayes(trainingDataMat,labelsMat);
 //        statModel = Learn.myRTrees(trainingDataMat,labelsMat);
 
-//        statModel = Learn.myAnn(trainingDataMat,labelsMat1);
+        statModel = Learn.myAnn(trainingDataMat,labelsMat);
 
         Mat sampleMat =  new Mat(1, 2, CV_32F);
 
@@ -78,7 +99,7 @@ public class SvmTest {
         float x, y;
         Scalar s;
         for (int i = 0; i < labels.length; i++) {
-            if (labels[i] == 1) {
+            if (labels[i][0] == 1) {
                 s = new Scalar(255, 0, 255);
             } else {
                 s = new Scalar(255, 255, 0);

@@ -1,25 +1,12 @@
 package com.example.opencvtest;
 
+import com.example.opencvtest.fun.FaceTest;
+import com.example.opencvtest.fun.SvmTest;
 import org.opencv.core.*;
-import org.opencv.core.Point;
 import org.opencv.highgui.HighGui;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.ml.Ml;
-import org.opencv.ml.SVM;
-import org.opencv.ml.TrainData;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.awt.Color.blue;
-import static java.awt.Color.green;
-import static org.opencv.core.CvType.*;
 
 @SpringBootApplication
 public class OpencvtestApplication {
@@ -47,7 +34,7 @@ public class OpencvtestApplication {
 //        //        System.out.println("OpenCV Mat data:\n" + m.dump());
 
 
-        HighGui.imshow("H",SvmTest.test());
+        HighGui.imshow("H", FaceTest.run());
         HighGui.waitKey(1000);
     }
 

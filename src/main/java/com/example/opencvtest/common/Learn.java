@@ -107,9 +107,10 @@ public class Learn {
      */
     public static StatModel myAnn(Mat trainingData, Mat labels){
         TrainData td = TrainData.create(trainingData, Ml.ROW_SAMPLE, labels);
-        Mat layerSizes = new Mat(trainingData.rows(), trainingData.cols(), CvType.CV_32FC1);
+        Mat layerSizes = new Mat(1, 5, CvType.CV_32FC1);
         // 含有两个隐含层的网络结构，输入、输出层各两个节点，每个隐含层含两个节点
-//        layerSizes.put(0, 0, new float[] { 2 });
+        //比如这里设置4行1列，那么第一行为trainingData的列数为输入层，最后一行为labels的列数为输出层,中间为隐含层暂时不明
+        layerSizes.put(0, 0, new float[] { trainingData.cols() ,2 , 2,2 ,labels.cols()});
         ANN_MLP ann = ANN_MLP.create();
         ann.setLayerSizes(layerSizes);
         ann.setTrainMethod(ANN_MLP.BACKPROP);
