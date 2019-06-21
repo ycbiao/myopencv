@@ -34,8 +34,9 @@ public class OpencvtestApplication {
 //        //        System.out.println("OpenCV Mat data:\n" + m.dump());
 
 
-        HighGui.imshow("H", FaceTest.run());
-        HighGui.waitKey(1000);
+//        HighGui.imshow("H", FaceTest.faceDetectionTest());
+//        HighGui.waitKey(1000);
+        FaceTest.faceRecognitionTest();
     }
 
 }
